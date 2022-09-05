@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package dev_container.cpp;
+
+import "google/protobuf/empty.proto";
+
+message User {
+  enum UserType {
+    ADMIN = 0;
+    STANDARD = 1;
+  }
+
+  int32 user_id = 1;
+  string user_name = 2;
+  string email = 3;
+  UserType user_type = 4;
+}
+
+message UserResponse { repeated User users = 1; }
+
+message UserRequest { User user = 1; }
+
+service UserService {
+  rpc ListUsers(google.protobuf.Empty) returns (UserResponse) {}
+  rpc CreateUser(UserRequest) returns (User) {}
+}

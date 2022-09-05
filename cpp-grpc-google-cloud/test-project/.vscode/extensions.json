@@ -1,0 +1,22 @@
+{
+    "recommendations": [
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "donjayamanne.githistory",
+        "iuyoy.highlight-string-code",
+        "visualstudioexptteam.vscodeintellicode",
+        "yandeu.five-server",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode-remote.remote-containers",
+        "ms-vscode-remote.remote-ssh",
+        "ms-vscode-remote.remote-ssh-edit",
+        "ms-vscode-remote.remote-wsl",
+        "ms-vscode.remote-repositories",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "wayou.vscode-todo-highlight",
+        "shardulm94.trailing-spaces",
+        "vscode-icons-team.vscode-icons",
+        "redhat.vscode-xml",
+        "redhat.vscode-yaml"
+    ]
+}

@@ -2,7 +2,7 @@
 
 Contenedores Docker para espacios de trabajo en C++
 
-## Herramientas instaladas
+## Herramientas Instaladas
 
 * gcc
 * clang-format

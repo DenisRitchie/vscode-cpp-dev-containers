@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Output directories
+[B|b]uild/
+[O|o]bj/
+[B|b]in/
+
