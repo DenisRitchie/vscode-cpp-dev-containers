@@ -1,0 +1,10 @@
+{
+  "cmake.sourceDirectory": "${workspaceFolder}/test-project",
+  "files.associations": {
+    "*.yml": "dockercompose",
+    "*.php": "php",
+    ".clangd": "yaml",
+    ".clang-tidy": "yaml",
+    ".clang-format": "yaml"
+  }
+}
