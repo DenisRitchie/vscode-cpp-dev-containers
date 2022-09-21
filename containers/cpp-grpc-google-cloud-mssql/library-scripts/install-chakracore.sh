@@ -21,6 +21,23 @@ check_packages() {
     fi
 }
 
+# Cleanup temporary directory and associated files when exiting the script.
+cleanup() {
+    EXIT_CODE=$?
+    set +e
+    if [[ -n "${TMP_DIR}" ]]; then
+        echo "Executing cleanup of tmp files"
+        rm -Rf "${TMP_DIR}"
+    fi
+    exit $EXIT_CODE
+}
+
+trap cleanup EXIT
+
+TMP_DIR=$(mktemp -d -t chakracore-XXXXXXXXXX)
+
+cd ${TMP_DIR}
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Install additional packages needed by vcpkg: https://github.com/microsoft/vcpkg/blob/master/README.md#installing-linux-developer-tools
@@ -29,7 +46,7 @@ check_packages git build-essential ninja-build clang libicu-dev
 # https://github.com/chakra-core/ChakraCore/wiki/Building-ChakraCore
 # Start Installation
 # Clone repository with ports and installer
-git clone https://github.com/Microsoft/ChakraCore chakracore
+git clone https://github.com/Microsoft/ChakraCore ${TMP_DIR}/chakracore
 
 # Let's build!
-cd chakracore && ./build.sh -y -n --static -j=14
+cd ${TMP_DIR}/chakracore && ./build.sh -y -n --static -j=14

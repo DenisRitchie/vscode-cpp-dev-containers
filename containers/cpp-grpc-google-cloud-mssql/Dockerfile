@@ -1,3 +1,8 @@
+# https://github.com/microsoft/vscode-dev-containers/blob/main/script-library/docs/docker.md
+# https://github.com/microsoft/vscode-dev-containers/tree/main/containers/docker-from-docker-compose
+
+# Note: You can use any Debian/Ubuntu based image you want.
+
 # [Choice] Debian / Ubuntu version (use Debian 11, Ubuntu 18.04/22.04 on local arm64/Apple Silicon): debian-11, debian-10, ubuntu-22.04, ubuntu-20.04, ubuntu-18.04
 ARG VARIANT=ubuntu-22.04
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
@@ -40,9 +45,11 @@ RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
     && rm -f /tmp/reinstall-cmake.sh
 
 # Install SQL Tools: SQLPackage and sqlcmd
-COPY mssql/install-sqltools.sh install-sqltools.sh
-RUN bash ./install-sqltools.sh \
-    && apt-get clean -y && rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+COPY library-scripts/install-sqltools.sh /tmp/
+RUN bash /tmp/install-sqltools.sh \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/* /tmp/library-scripts \
+    && rm -f /tmp/install-sqltools.sh
 
 # Install ChakraCore for Linux
 COPY library-scripts/install-chakracore.sh /tmp/
@@ -64,7 +71,6 @@ RUN su vscode -c "${VCPKG_ROOT}/vcpkg install boost"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install boost-asio"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install boost-range"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install benchmark"
-RUN su vscode -c "${VCPKG_ROOT}/vcpkg install celero"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install grpc"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install apsi"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install asio"
@@ -72,6 +78,7 @@ RUN su vscode -c "${VCPKG_ROOT}/vcpkg install asio-grpc"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install bitserializer"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install tinyxml2"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install cpp-jwt"
+RUN su vscode -c "${VCPKG_ROOT}/vcpkg install jwt-cpp"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install range-v3"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install refl-cpp"
 RUN su vscode -c "${VCPKG_ROOT}/vcpkg install rxcpp"
