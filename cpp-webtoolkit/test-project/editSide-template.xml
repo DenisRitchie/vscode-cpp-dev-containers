@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<messages>
+  <message id="editSide-template">
+    <div class="input-group mb-3">
+      <span class="input-group-text">@</span>
+      ${name}
+    </div>
+    <div class="input-group mb-3">
+      ${amount1}
+      <span class="input-group-text">.00</span>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text">$</span>
+      ${amount2}
+      <span class="input-group-text">.00</span>
+    </div>
+  </message>
+</messages>

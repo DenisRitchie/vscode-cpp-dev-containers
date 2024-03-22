@@ -3,9 +3,9 @@ FROM archlinux:${VARIANT}
 USER root
 
 # Install needed packages. Use a separate RUN statement to add your own dependencies.
-RUN pacman --noconfirm -Sy --needed gcc clang lldb llvm gdb cmake cppcheck valgrind git base-devel
+RUN pacman --noconfirm -Sy --needed gcc clang lldb llvm gdb cmake cppcheck valgrind git base-devel boost-libs
 RUN pacman --noconfirm -Sy --needed zip unzip pkg-config bash-completion ninja autoconf automake autoconf-archive
-RUN pacman --noconfirm -Sy --needed libxmu libxi libgl
+RUN pacman --noconfirm -Syu --needed libharu wt
 
 # Setup ENV vars for vcpkg
 ENV VCPKG_ROOT=/usr/local/vcpkg \
@@ -42,9 +42,7 @@ RUN chmod -R g+r+w "${VCPKG_ROOT}" "${VCPKG_DOWNLOADS}"
 
 # [Optional] Uncomment this section to install additional vcpkg ports.
 
-RUN ${VCPKG_ROOT}/vcpkg install boost --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install abseil --only-downloads
-RUN ${VCPKG_ROOT}/vcpkg install openssl --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install asio --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install benchmark --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install cpp-jwt --only-downloads
@@ -54,11 +52,9 @@ RUN ${VCPKG_ROOT}/vcpkg install refl-cpp --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install bext-di --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install bext-sml --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install bext-ut --only-downloads
-RUN ${VCPKG_ROOT}/vcpkg install libharu --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install libxlsxwriter --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install log4cplus --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install cpprestsdk --only-downloads
-# RUN ${VCPKG_ROOT}/vcpkg install microsoft-signalr --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install nlohmann-json --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install cpp-httplib --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install libxml2 --only-downloads
@@ -73,9 +69,6 @@ RUN ${VCPKG_ROOT}/vcpkg install protobuf --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install protobuf-c --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install websocketpp --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install telnetpp --only-downloads
-RUN ${VCPKG_ROOT}/vcpkg install wt --only-downloads
-RUN ${VCPKG_ROOT}/vcpkg install grpc --only-downloads
-RUN ${VCPKG_ROOT}/vcpkg install asio-grpc --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install crow --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install hiredis --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install redis-plus-plus --only-downloads
@@ -84,9 +77,7 @@ RUN ${VCPKG_ROOT}/vcpkg install mongoose --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install mongo-c-driver --only-downloads
 RUN ${VCPKG_ROOT}/vcpkg install mongo-cxx-driver --only-downloads
 
-RUN ${VCPKG_ROOT}/vcpkg install wt
 RUN ${VCPKG_ROOT}/vcpkg install abseil
-RUN ${VCPKG_ROOT}/vcpkg install openssl
 RUN ${VCPKG_ROOT}/vcpkg install asio
 RUN ${VCPKG_ROOT}/vcpkg install benchmark
 RUN ${VCPKG_ROOT}/vcpkg install cpp-jwt
@@ -96,11 +87,9 @@ RUN ${VCPKG_ROOT}/vcpkg install refl-cpp
 RUN ${VCPKG_ROOT}/vcpkg install bext-di
 RUN ${VCPKG_ROOT}/vcpkg install bext-sml
 RUN ${VCPKG_ROOT}/vcpkg install bext-ut
-RUN ${VCPKG_ROOT}/vcpkg install libharu
 RUN ${VCPKG_ROOT}/vcpkg install libxlsxwriter
 RUN ${VCPKG_ROOT}/vcpkg install log4cplus
 RUN ${VCPKG_ROOT}/vcpkg install cpprestsdk
-# RUN ${VCPKG_ROOT}/vcpkg install microsoft-signalr --recurse
 RUN ${VCPKG_ROOT}/vcpkg install nlohmann-json
 RUN ${VCPKG_ROOT}/vcpkg install cpp-httplib
 RUN ${VCPKG_ROOT}/vcpkg install libxml2
@@ -115,8 +104,6 @@ RUN ${VCPKG_ROOT}/vcpkg install protobuf
 RUN ${VCPKG_ROOT}/vcpkg install protobuf-c
 RUN ${VCPKG_ROOT}/vcpkg install websocketpp
 RUN ${VCPKG_ROOT}/vcpkg install telnetpp
-RUN ${VCPKG_ROOT}/vcpkg install grpc
-RUN ${VCPKG_ROOT}/vcpkg install asio-grpc
 RUN ${VCPKG_ROOT}/vcpkg install crow
 RUN ${VCPKG_ROOT}/vcpkg install hiredis
 RUN ${VCPKG_ROOT}/vcpkg install redis-plus-plus
@@ -124,4 +111,3 @@ RUN ${VCPKG_ROOT}/vcpkg install cpp-redis
 RUN ${VCPKG_ROOT}/vcpkg install mongoose
 RUN ${VCPKG_ROOT}/vcpkg install mongo-c-driver
 RUN ${VCPKG_ROOT}/vcpkg install mongo-cxx-driver
-RUN ${VCPKG_ROOT}/vcpkg install boost
